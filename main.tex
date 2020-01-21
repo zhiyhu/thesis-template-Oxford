@@ -1,0 +1,177 @@
+\documentclass[oneside,12pt]{report}
+
+%load any additional packages
+
+%Import the natbib package and sets a bibliography  and citation styles
+\usepackage[square,numbers,sort&compress,nonamebreak]{natbib}
+\bibliographystyle{plain}
+%\setcitestyle{authoryear,open={((},close={))}}
+
+% "tocbibind" will print the "References" or "Bibliography" in the table of contents
+\usepackage[nottoc]{tocbibind}
+ 
+\usepackage{afterpage}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{parskip}
+\usepackage[a4paper,width=150mm,top=25mm,bottom=25mm]{geometry}
+\usepackage{setspace}
+\usepackage[margin=0pt,labelsep=period,labelfont=bf,font={small,sl,bf}]{caption}
+%http://anorien.csc.warwick.ac.uk/mirrors/CTAN/macros/latex/contrib/caption/caption-eng.pdf
+\usepackage{subcaption}
+\usepackage{ragged2e} 
+%\usepackage{fontspec}
+
+\newcommand{\matr}[1]{\mathbf{#1}}  % to define the matrix
+\usepackage{array}
+\usepackage{lipsum}
+
+\usepackage{textcomp}
+\usepackage{gensymb}
+\usepackage[version=4]{mhchem}
+
+\usepackage{listings}
+
+\usepackage{xcolor}
+ 
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+ 
+% in case you would like to insert any R code
+\lstdefinestyle{mystyle}{
+  language=R,
+  %backgroundcolor=\color{backcolour},   
+  commentstyle=\color{codegreen},
+  keywordstyle=\color{magenta},
+  numberstyle=\tiny\color{codegray},
+  stringstyle=\color{codepurple},
+  basicstyle=\ttfamily\footnotesize,
+  breakatwhitespace=false,         
+  breaklines=true,                 
+  captionpos=b,                    
+  keepspaces=true,                 
+  numbers=left,                    
+  numbersep=5pt,                  
+  showspaces=false,                
+  showstringspaces=false,
+  showtabs=false,                  
+  tabsize=2      
+}
+
+\lstset{style=mystyle}
+
+\usepackage{longtable}
+\usepackage{lipsum} % just for dummy text- not needed for a longtable
+
+%\doublespacing
+\setlength{\parindent}{0ex}
+\setlength{\parskip}{1.8ex}
+\linespread{1.213}
+
+
+\usepackage{hyperref} %hyperlink
+\hypersetup{
+  colorlinks=true,
+  linkcolor=black,
+  filecolor=black,      
+  urlcolor=black,
+  citecolor=black
+}
+
+%% Here for your header and foot
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhead{}
+\lhead{Thesis title}
+\lfoot{Page \thepage}
+\cfoot{Chapter \thechapter}
+\rfoot{Right foot}
+
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\renewcommand{\baselinestretch}{2}
+\renewcommand{\arraystretch}{2} %The height of each row is set to 1.5 relative to its default height.
+\setlength{\tabcolsep}{8pt} %The space between the text and the left/right border of its containing cell is set to 18pt with this command. Again, you may use other units if needed.
+
+\setlength{\headheight}{16pt} % to fix the warning \headheight is too small
+
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\graphicspath{ {images/} }
+
+\pagenumbering{roman}
+%%% title page
+
+
+%end the preamble and start the document
+\begin{document}
+
+%this baselineskip gives sufficient line spacing for an examiner to easily
+%markup the thesis with comments
+\baselineskip=18pt plus1pt
+
+%set the number of sectioning levels that get number and appear in the contents
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+
+\begin{spacing}{1.5}
+\include{titlepage}
+\end{spacing}
+
+% add an empty page after title page
+\newpage\null\thispagestyle{empty}\newpage
+
+\spacing{1.2}
+
+\setcounter{page}{2}
+\include{chapters/abstract}
+
+%%%%%%%%%%
+\chapter*{Acknowledgements}
+\input{chapters/acknowledgements}
+
+%%%%%%%%%%
+\chapter*{Declaration}
+
+\lipsum[1]
+
+\spacing{1.5}
+%%%%%%%%%%
+\newpage
+\tableofcontents
+
+
+\newpage
+%\addcontentsline{toc}{chapter}{\listfigurename}
+\listoffigures  % generate and include a list of figures
+
+\newpage
+%\addcontentsline{toc}{chapter}{\listtablename}
+\listoftables
+
+%%%%%%%%%%
+\chapter{Introduction}
+\pagenumbering{arabic}
+\input{chapters/introduction}
+
+
+\chapter[Chapter 2 title]{\setstretch{1.1} Chapter 2 title}
+\input{chapters/chapter02}
+ 
+\chapter[Chapter 3 title]{\setstretch{1.1} Chapter 3 title}
+\input{chapters/chapter03}
+
+\normalsize
+\spacing{1.5}
+%next line adds the Bibliography to the contents page
+%\addcontentsline{toc}{chapter}{References}
+%uncomment next line to change bibliography name to references
+\renewcommand{\bibname}{References}
+
+\bibliography{mybibliography}        %use a bibtex bibliography file
+%\bibliographystyle{plain}  %use the plain bibliography style
+
+\end{document}
